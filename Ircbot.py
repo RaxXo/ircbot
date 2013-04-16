@@ -2,7 +2,8 @@ import socket
 import lxml.html
 from random import randint
 
-channel = "#murklan"
+channel = raw_input("Channel?: ")
+nick = raw_input("Nick?: ")
 class Bot:
     def __init__(self, server='irc.quakenet.org', port=6667):
         """creates the socket object and connects to the server"""
@@ -10,9 +11,9 @@ class Bot:
         self.irc.connect( (server, port ) )
         self.data = self.irc.recv ( 4096 )
         
-    def nickname(self, nick = 'BOTchii', realname = 'BOTchii'):
+    def nickname(self, realname = 'BOTchii'):
         self.irc.send('NICK ' + nick + '\r\n')
-        self.irc.send('USER Otchii bot botty bot bot: Python IRC\r\n')
+        self.irc.send('USER Botty bot botty bot bot: Python IRC\r\n')
 
     def join_channel(self):
         self.irc.send('JOIN ' + channel + '\r\n')
