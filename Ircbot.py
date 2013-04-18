@@ -32,9 +32,13 @@ class Bot:
         #reddit first post
         if data.find(':!firstpost') != -1:
             try:
-                firstpost = self.reddit.get_subreddit('all').get_hot(limit=1)
-                post = [str(x) for x in firstpost]
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Reddit First Post: \x02' + str(post) + '\r\n')
+                title = ''
+                url = ''
+                firstposts = self.reddit.get_subreddit('all').get_hot(limit=1)
+                for firstpost in firstposts:
+                    title = firstpost.title
+                    url = firstpost.url
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Reddit First Post: \x02' + title + ' ' + url + '\r\n')
             except:
                 pass
         
@@ -68,13 +72,14 @@ class Bot:
             except:
                 pass
 
+        #roll
         if data.find(':!roll') != -1:
             try:
             	data = data.split(' :')
                 nick = data[0].split('!')[0]
                 nick = nick[1:]
             	msg = data[1].split()
-            	print msg
+            	#print msg
             	if len(msg) > 2:
             		self.irc.send('PRIVMSG ' + channel + ' :\x02' + nick + ' rolls ' + str(randint(int(msg[1]), int(msg[2]))) +'\x02\r\n')
                 elif len(msg) == 1:
