@@ -32,17 +32,22 @@ class Bot:
         #reddit first post
         if data.find(':!firstpost') != -1:
             try:
+                terms = data.split(' :')
+                terms = terms[1].split()
+                sub = 'all'
+                if len(terms)>1:
+                    sub = terms[1]
                 title = ''
                 url = ''
                 ups = ''
                 downs = ''
-                firstposts = self.reddit.get_subreddit('all').get_hot(limit=1)
+                firstposts = self.reddit.get_subreddit(sub).get_hot(limit=1)
                 for firstpost in firstposts:
                     ups = firstpost.ups
                     downs = firstpost.downs
                     title = firstpost.title
                     url = firstpost.url
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Reddit First Post: (' + str(ups) + '|' + str(downs) +') \x02' + title + ' ' + url + '\r\n')
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Top post from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - ' + title + ' ' + url + '\r\n')
             except:
                 pass
         
