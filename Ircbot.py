@@ -34,11 +34,15 @@ class Bot:
             try:
                 title = ''
                 url = ''
+                ups = ''
+                downs = ''
                 firstposts = self.reddit.get_subreddit('all').get_hot(limit=1)
                 for firstpost in firstposts:
+                    ups = firstpost.ups
+                    downs = firstpost.downs
                     title = firstpost.title
                     url = firstpost.url
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Reddit First Post: \x02' + title + ' ' + url + '\r\n')
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Reddit First Post: (' + str(ups) + '|' + str(downs) +') \x02' + title + ' ' + url + '\r\n')
             except:
                 pass
         
