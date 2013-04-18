@@ -68,13 +68,17 @@ class Bot:
             except:
                 pass
 
-        if data.find(':!roll ') != -1:
+        if data.find(':!roll') != -1:
             try:
             	data = data.split(' :')
+                nick = data[0].split('!')[0]
+                nick = nick[1:]
             	msg = data[1].split()
             	print msg
             	if len(msg) > 2:
-            		self.irc.send('PRIVMSG ' + channel + ' :\x02' + str(randint(int(msg[1]), int(msg[2]))) +'\x02\r\n')
+            		self.irc.send('PRIVMSG ' + channel + ' :\x02' + nick + ' rolls ' + str(randint(int(msg[1]), int(msg[2]))) +'\x02\r\n')
+                elif len(msg) == 1:
+                    self.irc.send('PRIVMSG ' + channel + ' :\x02' + nick + ' rolls ' + str(randint(1, 100)) +'\x02\r\n')
             except:
                 pass
         
