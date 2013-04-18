@@ -65,13 +65,14 @@ class Bot:
                 ups = ''
                 downs = ''
                 firstposts = self.reddit.get_subreddit(sub).get_hot(limit=100)
-                for x in range(0, randint(1, 100)):
+                stop = randint(1,100)
+                for x in range(0, stop):
                     firstpost = next(firstposts)
                 ups = firstpost.ups
                 downs = firstpost.downs
                 title = firstpost.title
                 url = firstpost.url
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Top post from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - \x034' + title + '\x03 - ' + url + '\r\n')
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Post #' + stop +' from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - \x034' + title + '\x03 - ' + url + '\r\n')
             except:
                 pass
 
