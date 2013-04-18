@@ -65,14 +65,14 @@ class Bot:
                 ups = ''
                 downs = ''
                 firstposts = self.reddit.get_subreddit(sub).get_hot(limit=100)
-                stop = randint(1,100)
-                for x in range(0, stop):
+                stopnumb = randint(1,100)
+                for x in range(0, stopnumb):
                     firstpost = next(firstposts)
                 ups = firstpost.ups
                 downs = firstpost.downs
                 title = firstpost.title
                 url = firstpost.url
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Post #' + stop +' from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - \x034' + title + '\x03 - ' + url + '\r\n')
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Post #' + str(stopnumb) + ' from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - \x034' + title + '\x03 - ' + url + '\r\n')
             except:
                 pass
 
@@ -97,7 +97,6 @@ class Bot:
                 url = split[0]
                 for x in range(1, len(split)-1):
                     url = url + '.' + split[x]
-                print url
                 title = lxml.html.parse(url).find(".//title").text
                 if not title.find("the simple image sharer") != -1:
                     self.irc.send('PRIVMSG ' + channel + ' :\x02Imgur: \x02' + title +'\r\n')
