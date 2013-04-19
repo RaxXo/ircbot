@@ -47,7 +47,7 @@ class Bot:
                     downs = firstpost.downs
                     title = firstpost.title
                     url = firstpost.url
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Top post from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - \x034' + title + '\x03 - ' + url + '\r\n')
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Top post from ' + sub + ': \x02<\x037 ' + str(ups) + '\x03 |\x0311 ' + str(downs) +'\x03 > - \x034' + title + '\x03 - ' + url + '\r\n')
             except:
                 pass
         
@@ -72,7 +72,7 @@ class Bot:
                 downs = firstpost.downs
                 title = firstpost.title
                 url = firstpost.url
-                self.irc.send('PRIVMSG ' + channel + ' :\x02Post #' + str(stopnumb) + ' from ' + sub + ': \x02(' + str(ups) + '|' + str(downs) +') - \x034' + title + '\x03 - ' + url + '\r\n')
+                self.irc.send('PRIVMSG ' + channel + ' :\x02Post #' + str(stopnumb) + ' from ' + sub + ': \x02<\x037 ' + str(ups) + '\x03 |\x0311 ' + str(downs) +'\x03 > - \x034' + title + '\x03 - ' + url + '\r\n')
             except:
                 pass
 
