@@ -30,7 +30,7 @@ class Bot:
             nick = data.split('!')[0]
             nick = nick[1:]
             print "afasfasfasf"
-            self.irc.send('PRIVMSG ' + channel + ' :ACTION is a bot and doesnt\'t have any feelings. Still, fuck you (or thank you?), ' + nick + '!\r\n')
+            self.irc.send('PRIVMSG ' + channel + ' :ACTION is a bot and doesn\'t have any feelings. Still, fuck you (or thank you?), ' + nick + '!\r\n')
 
         #reddit first post
         if data.find(':!firstpost') != -1:
