@@ -77,13 +77,13 @@ class Bot:
                 pass
 
         #YouTube links
-        if data.find(':http://youtu.be') != -1 or data.find(':http://www.youtube.com') != -1:
+        if data.find(':http://') != -1 and not data.find('imgur') !=-1:
             try:
             	split = data.split(' :')
             	split = split[1].split()
             	url = split[0]
             	title = lxml.html.parse(url).find(".//title").text
-            	self.irc.send('PRIVMSG ' + channel + ' :\x02YouTube: \x02' + title +'\r\n')
+            	self.irc.send('PRIVMSG ' + channel + ' :\x02URL:\x02\x033 ' + title +'\r\n')
             except:
                 pass
 
@@ -99,7 +99,7 @@ class Bot:
                     url = url + '.' + split[x]
                 title = lxml.html.parse(url).find(".//title").text
                 if not title.find("the simple image sharer") != -1:
-                    self.irc.send('PRIVMSG ' + channel + ' :\x02Imgur: \x02' + title +'\r\n')
+                    self.irc.send('PRIVMSG ' + channel + ' :\x02Imgur: \x028' + title +'\r\n')
                 else:
                     print "not found"
             except:
