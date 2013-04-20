@@ -4,7 +4,7 @@ import praw
 from random import randint
 
 channel = raw_input("Channel: ")
-nick = raw_input("Nick: ")
+botnick = raw_input("Nick: ")
 class Bot:
     def __init__(self, server='irc.quakenet.org', port=6667):
         """creates the socket object and connects to the server"""
@@ -13,8 +13,8 @@ class Bot:
         self.data = self.irc.recv ( 4096 )
         self.reddit = praw.Reddit(user_agent='just a simple irc bot')
         
-    def nickname(self, realname = 'BOTchii'):
-        self.irc.send('NICK ' + nick + '\r\n')
+    def nickname(self, realname = botnick):
+        self.irc.send('NICK ' + botnick + '\r\n')
         self.irc.send('USER Botty bot botty bot bot: Python IRC\r\n')
 
     def join_channel(self):
@@ -26,8 +26,11 @@ class Bot:
             self.irc.send('PONG ' + data.split()[1] + '\r\n')
             self.irc.send('JOIN ' + channel + '\r\n')
         
-        if data.find(':bajs') != -1:
-        	self.irc.send('PRIVMSG ' + channel + ' :mer bajs\r\n')
+        if data.find(':ACTION') != -1 and data.find(botnick) != -1:
+            nick = data.split('!')[0]
+            nick = nick[1:]
+            print "afasfasfasf"
+            self.irc.send('PRIVMSG ' + channel + ' :ACTION is a bot and doesnt\'t have any feelings. Still, fuck you (or thank you?), ' + nick + '!\r\n')
 
         #reddit first post
         if data.find(':!firstpost') != -1:
